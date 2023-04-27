@@ -1,0 +1,156 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}  
+
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\floatname{algorithm}{Algoritmo}
+\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
+\renewcommand{\algorithmicensure}{\textbf{Saída:}}
+\renewcommand{\algorithmicif}{\textbf{se}}
+\renewcommand{\algorithmicthen}{\textbf{então}}
+\renewcommand{\algorithmicend}{\textbf{fim}}
+\renewcommand{\algorithmicforall}{\textbf{para todo}}
+\renewcommand{\algorithmicfor}{\textbf{para}}
+\renewcommand{\algorithmicreturn}{\textbf{retorne}}
+\renewcommand{\algorithmicelse}{\textbf{senão}}
+\renewcommand{\algorithmicdo}{\textbf{faça}}
+\renewcommand{\algorithmicfalse}{\textbf{falso}}
+\renewcommand{\algorithmicwhile}{\textbf{enquanto}}
+\renewcommand{\algorithmiccomment}[1]{\hspace{2em}// #1}
+
+\sloppy
+
+\title{Estruturas de Dados e Análise de Algoritmos - EDAA\\ Avaliação 1.1 – Algoritmos de Busca – Parte 1}
+
+\author{Rodrigo Schmidt Nurmberg\inst{1}}
+
+\address{Programa de Pós Graduação em Ciência da Computação (PPGCOMP)\\ Universidade Estadual do Oeste do Paraná (UNIOESTE)\\
+  Rua Universitária, 2069 Bloco B -- Bairro Universitário -- 85819-110 -- Cascavel -- PR
+  \email{rodrigo.nurmberg@unioeste.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+\begin{resumo} 
+Buscas são operações fundamentais na computação. Existem diversos métodos de busca, a seleção do mais adequado depende da natureza da aplicação. Neste trabalho foram implementados e discutidos 3 métodos clássicos de busca: sequencial, por saltos e binária.
+Os métodos foram comparados empiricamente, quanto ao número de comparações e ao tempo de execução, na busca de valores inteiros em arranjos estáticos, com base em dois cenários: aleatório e pior caso. Os resultados mostram que o algoritmo de propósito mais geral, busca sequencial, apesar de apresentar maior tempo médio de execução é mais rápido em buscas únicas que os demais métodos, que demandam ordenação prévia dos dados.
+\end{resumo}
+
+\section{Introdução}
+
+Busca e ordenação são operações essenciais na computação, como são utilizadas com frequência, mesmo pequenas otimizações podem gerar grandes impactos, principalmente ao operarem sobre grandes conjuntos de dados.
+
+A operação de busca consiste em determinar a posição ocupada por um elemento (chave de busca) em um conjunto de dados\footnote{Caso o elemento não esteja no conjunto, costuma-se retornar vazio ou falso.}.
+
+Na ordenação, para um dado conjunto de entrada $\langle a_{1}, a_{2}, ..., a_{n} \rangle$, retorna-se uma permutação da sequência de entrada $\langle a^{'}_{1}, a^{'}_{2}, ..., a^{'}_{n} \rangle \vert a^{'}_{i} \leq a^{'}_{i+1} \forall i_{1}^{n-1}$\cite{cormen_algoritmos:_2012}\footnote{Também é possível ordenar os valores de forma decrescente: $\langle a^{'}_{1}, a^{'}_{2}, ..., a^{'}_{n} \rangle \vert a^{'}_{i} \geq a^{'}_{i+1} \forall i_{1}^{n-1}$}.
+
+A escolha do algoritmo mais adequado, depende da natureza de cada aplicação e deve considerar, entre outros fatores, se os dados encontram-se ordenados, a forma como os dados estão armazenados (unidades de acesso aleatório ou sequencial, cada qual com sua velocidade), as estruturas de dados utilizadas (vetores, listas encadeadas, etc), quantidade de itens a ordenar e como estão distribuídos (uniformemente ou não) e também a arquitetura do computador (com diferentes operações e seus custos).
+
+\subsection{Algoritmos de busca} \label{sec:algoritmos}
+
+A seguir, são apresentados os pseudo-códigos dos 3 algoritmos de busca analisados neste trabalho, cujas características são sumarizadas no quadro comparativo da Tabela \ref{quadro:comparativo_buscas}.
+
+Os algoritmos tem como entrada o arranjo $ A^n_{i=1} \langle a_{1}, a_{2}, ..., a_{n} \rangle $ e a chave de busca $ x $, e como saída o índice $ i $ do 1º elemento $ a_{i} \vert a_{i} = x $ ou falso caso $ x \notin A $.
+
+\input{busca_sequencial}
+\input{busca_por_saltos}
+\input{busca_binaria}
+
+\begin{table}[h]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \input{quadro_algoritmos}
+    }
+    \caption{Quadro comparativo dos algoritmos de busca.}
+    \small{Fonte: Elaborado com base em \cite{sultana_brief_2017}.}
+    \label{quadro:comparativo_buscas}
+\end{table}
+\footnotetext{Custos para busca por salto simples, quando o custo do salto é igual ao custo da busca sequencial. \label{jump_search_simple}}
+
+\section{Materiais e Métodos}
+
+Os algoritmos da Seção \ref{sec:algoritmos}, foram implementados\footnote{Código e outras informações disponíveis em https://github.com/rsn86/edaa-01} na linguagem Python e comparados empiricamente na busca em arranjos estáticos, de valores inteiros sem repetições, com tamanhos entre 100.000 e 1.000.000 de elementos, em intervalos de 100.000.
+
+Para cada tamanho de arranjo, foram gerados 2 cenários de testes:
+\begin{itemize}
+    \item Aleatório: Arranjo e chave de busca gerados aleatoriamente\footnote{Valores entre 0 e 100 vezes o tamanho do arranjo.}. Para cada arranjo foram executadas 100 buscas com chaves distintas.
+    \item Pior caso: Chave de busca selecionada para maximizar o número de comparações de cada algoritmo\footnote{Arranjo do cenário aleatório, ordenado crescentemente, e chave de busca o último elemento do arranjo.}. Foram executadas 3 buscas.
+\end{itemize}
+
+A cada execução, registrou-se o número de comparações ($a_{i} = x$) e o tempo de execução (em ms) de cada um dos três métodos de busca implementados. Foram calculadas as médias ($\bar{x}$) e os desvios padrão ($\sigma$).
+
+Além disso, para o cenário aleatório, também foi registrado o percentual de vezes em que a chave estava presente no arranjo, coluna $x \in A$ da Tabela \ref{tab:resultados}.
+
+Para os métodos de busca que necessitam de arranjos ordenados, o tempo de ordenação\footnote{Utilizando o método de ordenação padrão da linguagem Python - TimSort.} foi registrado separadamente do tempo de execução das buscas\footnote{Calculou-se a média e desvio padrão de 3 execuções}.
+
+Os testes foram conduzidos em um ambiente de desenvolvimento colaborativo\footnote{https://research.google.com/colaboratory/faq.html}, cujos recursos são compartilhados e estão sujeitos à flutuações de disponibilidade. Para minimizar o impacto dessas flutuações nos resultados, foram realizadas 2 execuções adicionais para cada teste, e os 2 maiores tempos de execução foram descartados.
+
+\section{Resultados}
+A Tabela \ref{tab:resultados} sumariza os resultados dos testes realizados e está dividida em 3 conjuntos de colunas: cenários aleatório e pior caso, e ordenação.
+
+Para a ordenação são apresentados apenas os tempos médios e os desvios padrão, uma vez que se utilizou a implementação disponibilizada pela linguagem de programação e não se tem acesso aos números de comparações e trocas realizadas.
+
+Para o cenário de pior caso, apresentou-se o número de comparações (Comp. $x$), e não a média e desvio padrão, pois em todas as execuções foram realizadas o máximo de comparações de cada método, resultando num valor fixo e portanto $\sigma = 0$.
+
+Já no cenário aleatório, a coluna $x \in A$, traz apenas a média das vezes em que a chave esta presente no arranjo, o desvio padrão é irrelevante para análise em questão.
+
+\begin{table}[h]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \input{tabela-unificada}
+    }
+    \caption{Comparação empírica do desempenho dos métodos de busca}
+    %\small{Fonte: Do autor}
+    \label{tab:resultados}
+\end{table} 
+
+A influência da fluatação na disponibilidade dos recursos pode ser observada ao comparar os valores dos tempos de ordenação no cenário pior caso. Sendo o arranjo, a chave de busca e o número de comparações idênticos entre as execuções, esperava-se que os desvios padrão fossem pequenos, próximos a zero. Porém, apresentaram valores absolutos e relativos elevados, chegando a 64,77 ms e CV\footnote{Coeficiente de variação: $CV=100\frac{\sigma}{\bar{x}}$} de 15,63\%, para 1 milhão de elementos. Ainda, pode ser facilmente observada, neste mesmo cenário, pelos menores tempos de busca em conjuntos maiores, por ex. nos tempos para 800 e 900 mil elementos.
+
+O método de ordenação utilizado, beneficia-se da existência de sequências ordenadas\footnote{Máximas sequências monotônicas - sequências de maior comprimento sem inversão na ordenação.} no conjunto de dados. Isso pode explicar, pelo menos parcialmente, a aparente incongruência nos tempos de ordenação, nos quais arranjos maiores, com 800 mil e 1 milhão de elementos, apresentaram tempos menores que os arranjos de 700 mil e 900 mil elementos. Conforme \cite{auger:hal-01798381}, o custo do TimSort é $O(n + n\mathcal{H})$, a entropia $\mathcal{H}$\footnote{$\mathcal{H}=-\sum{\frac{r_{i}}{n} log_{2}(\frac{r_{i}}{n})}$, $r_{i} - $ comprimento da i-ésima sequência monotônica máxima.} depende do número e comprimento das sequencias parcialmente ordenadas. Porém, seu cálculo não é trivial e foge do escopo deste trabalho, sendo assim, $\mathcal{H}$ não foi calculada.
+
+Os custos encontrados para o pior caso, Tabela\ref{tab:resultados}, correspondem aos descritos na literatura e sumarizados no quadro da Tabela \ref{quadro:comparativo_buscas}, divergindo apenas para o algoritmo de buscas por saltos, sugerindo que o custo do salto é diferente do custo da busca sequencial\footnote{Nesse caso o tamanho do salto deveria ser $\sqrt{(a/b)N}$, com custo $\sqrt{abN}$. Custos, a: salto, b: busca sequencial. Porém o tamanho do salto utilizado foi $\sqrt{N}$.} ou que a literatura não considera o custo da busca sequencial, uma vez que o custo encontrado ($2\sqrt{N}$), corresponde ao custo reportado na literatura ($\sqrt{N}$), acrescido do custo da busca sequencial em um bloco de tamanho $\sqrt{N}$.
+
+\section{Conclusões}
+
+Conhecendo-se o cenário de utilização, é possível selecionar algoritmos mais adequados e performáticos. \cite{cappelle_searching_2021} apresenta um interessante levantamento sobre diversos algoritmos de busca em vetores. Nesse sentido, a principal conclusão deste estudo é que o custo de ordenação justifica-se para os casos de múltiplas buscas sobre o mesmo arranjo. E, apesar do algoritmo de busca binária apresentar o melhor desempenho, tanto em termos de tempo quanto comparações, ele não é adequado para vetores com muitas inserções e remoções, devido ao custo associado em se manter o vetor ordenado. Nesse caso, pode-se considerar a utilização de árvores de busca binária, preferencialmente as balanceadas, estruturas de dados não lineares, cujas restrições asseguram propriedades interessantes, garantindo bons custos de inserção, remoção e busca.
+
+O fato de ter sido adotado um arranjo com valores espalhados, não contínuos, e chaves de buscas que podiam estar ausentes do conjunto, apesar de contribuir para o aumento nos tempos de execução e no número de comparações,
+aproxima o cenário de testes de um cenário de uso real, no qual não se pode controlar a distribuição dos valores e não se tem certeza sobre a presença da chave de busca no conjunto.
+
+A influência da entropia carece de investigação. Alternativamente, poderia ser adotado um método menos suscetível a tal fator.
+
+A execução em ambiente compartilhado permitiu visualizar as relações de grandeza entre os métodos de busca e os tamanhos dos arranjos, porém valores mais precisos poderiam ser obtidos em um ambiente controlado, com alocação dedicada de recursos.
+
+A degradação na linearidade dos tempos de busca, observável no cenário pior caso da busca sequencial, com o crescimento do tamanho dos arranjos, pode estar relacionada à hierarquia de memória e a necessidade de movimentação dos dados. Um aprofundamento do estudo envolveria maiores conhecimentos sobre a arquitetura do ambiente, como modelo da CPU, tamanho e temporização das memórias cache e RAM.
+
+\bibliographystyle{sbc}
+\bibliography{edaa01}
+
+\end{document}

@@ -1,0 +1,20 @@
+
+\begin{algorithm}
+    \caption{ - Pseudo-código busca binária \cite[p. 410]{knuth1998art}}
+    \begin{algorithmic}[1]
+        \STATE $esquerda \leftarrow 1$
+        \STATE $direita \leftarrow n + 1$
+        \WHILE{$ esquerda \leq direita $}
+            \STATE $meio \leftarrow esquerda + \lfloor (direita - esquerda) / 2 \rfloor$
+            \IF{$ x = A[meio]$}
+                \RETURN $ i $
+            \ELSIF{$ x > A[meio] $}
+                \STATE $esquerda \leftarrow meio + 1$
+            \ELSE
+                \STATE $direita \leftarrow meio - 1$
+            \ENDIF
+        \ENDWHILE
+        \RETURN \FALSE
+    \end{algorithmic}
+    \label{alg:busca_binaria}
+\end{algorithm}

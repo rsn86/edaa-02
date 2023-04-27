@@ -1,0 +1,232 @@
+CPython: 3.9.16
+
+INSTALLED VERSIONS
+------------------
+commit           : 2e218d10984e9919f0296931d92ea851c6a6faf5
+python           : 3.9.16.final.0
+python-bits      : 64
+OS               : Linux
+OS-release       : 5.10.147+
+Version          : #1 SMP Sat Dec 10 16:00:40 UTC 2022
+machine          : x86_64
+processor        : x86_64
+byteorder        : little
+LC_ALL           : None
+LANG             : en_US.UTF-8
+LOCALE           : en_US.UTF-8
+
+pandas           : 1.5.3
+numpy            : 1.22.4
+pytz             : 2022.7.1
+dateutil         : 2.8.2
+setuptools       : 67.7.2
+pip              : 23.0.1
+Cython           : 0.29.34
+pytest           : 7.2.2
+hypothesis       : None
+sphinx           : 3.5.4
+blosc            : None
+feather          : None
+xlsxwriter       : None
+lxml.etree       : 4.9.2
+html5lib         : 1.1
+pymysql          : None
+psycopg2         : 2.9.6
+jinja2           : 3.1.2
+IPython          : 7.34.0
+pandas_datareader: 0.10.0
+bs4              : 4.11.2
+bottleneck       : None
+brotli           : None
+fastparquet      : None
+fsspec           : 2023.4.0
+gcsfs            : None
+matplotlib       : 3.7.1
+numba            : 0.56.4
+numexpr          : 2.8.4
+odfpy            : None
+openpyxl         : 3.0.10
+pandas_gbq       : 0.17.9
+pyarrow          : 9.0.0
+pyreadstat       : None
+pyxlsb           : None
+s3fs             : None
+scipy            : 1.10.1
+snappy           : None
+sqlalchemy       : 2.0.10
+tables           : 3.8.0
+tabulate         : 0.8.10
+xarray           : 2022.12.0
+xlrd             : 2.0.1
+xlwt             : None
+zstandard        : None
+tzdata           : 2023.3
+None
+
+# uname -a
+Linux-5.10.147+-x86_64-with-glibc2.31
+
+# free -m
+              total        used        free      shared  buff/cache   available
+Mem:          12985        1437        8117          21        3430       11249
+Swap:             0 
+
+# cat /proc/meminfo
+MemTotal:       13297192 kB
+MemFree:         8310920 kB
+MemAvailable:   11518668 kB
+Buffers:          329732 kB
+Cached:          3060240 kB
+SwapCached:            0 kB
+Active:           606360 kB
+Inactive:        4144616 kB
+Active(anon):       3480 kB
+Inactive(anon):  1360072 kB
+Active(file):     602880 kB
+Inactive(file):  2784544 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:             0 kB
+SwapFree:              0 kB
+Dirty:              2160 kB
+Writeback:             0 kB
+AnonPages:       1360960 kB
+Mapped:           315148 kB
+Shmem:             21824 kB
+KReclaimable:     123548 kB
+Slab:             155120 kB
+SReclaimable:     123548 kB
+SUnreclaim:        31572 kB
+KernelStack:        4096 kB
+PageTables:        25652 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     6648596 kB
+Committed_AS:    2828164 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:        8964 kB
+VmallocChunk:          0 kB
+Percpu:             1320 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:       92984 kB
+DirectMap2M:     5146624 kB
+DirectMap1G:    10485760 kB
+
+# cat /proc/cpuinfo
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 79
+model name	: Intel(R) Xeon(R) CPU @ 2.20GHz
+stepping	: 0
+microcode	: 0xffffffff
+cpu MHz		: 2200.214
+cache size	: 56320 KB
+physical id	: 0
+siblings	: 2
+core id		: 0
+cpu cores	: 1
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm rdseed adx smap xsaveopt arat md_clear arch_capabilities
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa mmio_stale_data retbleed
+bogomips	: 4400.42
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 79
+model name	: Intel(R) Xeon(R) CPU @ 2.20GHz
+stepping	: 0
+microcode	: 0xffffffff
+cpu MHz		: 2200.214
+cache size	: 56320 KB
+physical id	: 0
+siblings	: 2
+core id		: 0
+cpu cores	: 1
+apicid		: 1
+initial apicid	: 1
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx pdpe1gb rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm abm 3dnowprefetch invpcid_single ssbd ibrs ibpb stibp fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm rdseed adx smap xsaveopt arat md_clear arch_capabilities
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass l1tf mds swapgs taa mmio_stale_data retbleed
+bogomips	: 4400.42
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 46 bits physical, 48 bits virtual
+power management:
+
+# lscpu
+Architecture:                    x86_64
+CPU op-mode(s):                  32-bit, 64-bit
+Byte Order:                      Little Endian
+Address sizes:                   46 bits physical, 48 bits virtual
+CPU(s):                          2
+On-line CPU(s) list:             0,1
+Thread(s) per core:              2
+Core(s) per socket:              1
+Socket(s):                       1
+NUMA node(s):                    1
+Vendor ID:                       GenuineIntel
+CPU family:                      6
+Model:                           79
+Model name:                      Intel(R) Xeon(R) CPU @ 2.20GHz
+Stepping:                        0
+CPU MHz:                         2200.154
+BogoMIPS:                        4400.30
+Hypervisor vendor:               KVM
+Virtualization type:             full
+L1d cache:                       32 KiB
+L1i cache:                       32 KiB
+L2 cache:                        256 KiB
+L3 cache:                        55 MiB
+NUMA node0 CPU(s):               0,1
+Vulnerability Itlb multihit:     Not affected
+Vulnerability L1tf:              Mitigation; PTE Inversion
+Vulnerability Mds:               Vulnerable; SMT Host state unknown
+Vulnerability Meltdown:          Vulnerable
+Vulnerability Mmio stale data:   Vulnerable
+Vulnerability Retbleed:          Vulnerable
+Vulnerability Spec store bypass: Vulnerable
+Vulnerability Spectre v1:        Vulnerable: __user pointer sanitization and use
+                                 rcopy barriers only; no swapgs barriers
+Vulnerability Spectre v2:        Vulnerable, IBPB: disabled, STIBP: disabled, PB
+                                 RSB-eIBRS: Not affected
+Vulnerability Srbds:             Not affected
+Vulnerability Tsx async abort:   Vulnerable
+Flags:                           fpu vme de pse tsc msr pae mce cx8 apic sep mtr
+                                 r pge mca cmov pat pse36 clflush mmx fxsr sse s
+                                 se2 ss ht syscall nx pdpe1gb rdtscp lm constant
+                                 _tsc rep_good nopl xtopology nonstop_tsc cpuid 
+                                 tsc_known_freq pni pclmulqdq ssse3 fma cx16 pci
+                                 d sse4_1 sse4_2 x2apic movbe popcnt aes xsave a
+                                 vx f16c rdrand hypervisor lahf_lm abm 3dnowpref
+                                 etch invpcid_single ssbd ibrs ibpb stibp fsgsba
+                                 se tsc_adjust bmi1 hle avx2 smep bmi2 erms invp
+                                 cid rtm rdseed adx smap xsaveopt arat md_clear 
+                                 arch_capabilities
