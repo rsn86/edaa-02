@@ -1,6 +1,6 @@
 # edaa-01
-EDAA PPGCOMP/UNIOESTE - Avaliação 1.1 - Algoritmos de Busca
+EDAA PPGCOMP/UNIOESTE - Atividade 1.2 - Algoritmos de Busca - Parte 2
 
 
-https://colab.research.google.com/drive/1-uu-8JWry7L_cEV1481qsgIHO5QkpN4X
+https://colab.research.google.com/drive/1FkUHacB25xnsYwz9xa5Vo2_iGoipHCxE?usp=sharing
 
