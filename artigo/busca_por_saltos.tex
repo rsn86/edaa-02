@@ -1,0 +1,23 @@
+\begin{algorithm}
+    \caption{ - Busca por saltos \cite{shneiderman_jump_1978}}
+    \begin{algorithmic}[1]
+        \STATE $salto \leftarrow \lfloor \sqrt{n} \rfloor$
+        \STATE $i \leftarrow 1$
+        \STATE $j \leftarrow min(salto, n) + 1$
+        \WHILE{$ j \leq n $}
+            \IF{$ A[j] \geq x$}
+                \WHILE{$ i \leq j $}
+                    \IF{$ x = A[i]$}
+                        \RETURN $ i $
+                    \ENDIF
+                    \STATE $i \leftarrow i + 1$
+                \ENDWHILE
+                \RETURN \FALSE
+            \ENDIF
+            \STATE $i \leftarrow j$
+            \STATE $j \leftarrow min(j + salto, n)$
+        \ENDWHILE
+        \RETURN \FALSE
+    \end{algorithmic}
+    \label{alg:busca_saltos}
+\end{algorithm}

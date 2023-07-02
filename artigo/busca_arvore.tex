@@ -1,0 +1,16 @@
+
+\begin{algorithm}
+    \caption{ - Busca em árvore binária de busca \cite[p. 212]{cormen_algoritmos:_2012}}
+    \begin{algorithmic}[1]
+        \STATE $e \leftarrow Arvore.inicio$
+        \WHILE{$ e \ne NULO \AND e.chave \ne x $}
+            \IF{$ x < e.chave$}
+                \STATE $e \leftarrow e.esquerda$
+            \ELSE
+                \STATE $e \leftarrow e.direita$
+            \ENDIF
+        \ENDWHILE
+        \RETURN e
+    \end{algorithmic}
+    \label{alg:busca_arvore}
+\end{algorithm}

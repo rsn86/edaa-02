@@ -1,0 +1,23 @@
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Algoritmo}          & \textbf{Busca em Árvore Binária de Busca}
+\\ \hline
+\textbf{Funcionamento}      & \begin{tabular}[c]{@{}c@{}}A partir da raiz, desce a árvore, comparando, sucessivamente, a chave de busca\\ com o nó atual até encontrá-la ou atingir um nó folha.\\ Caso a chave seja maior, busca na subárvore direita. Se for menor, na subárvore esquerda.\end{tabular}
+\\ \hline
+\textbf{Abordagem}          & Divisão e conquista
+\\ \hline
+\textbf{Melhor caso}        & \begin{tabular}[c]{@{}c@{}}O(1)\\ Raiz da árvore\end{tabular}
+\\ \hline
+\textbf{Caso médio}         & \begin{tabular}[c]{@{}c@{}}O(h(N))\\ Sendo h(N) a altura de uma árvore com N elementos\protect\footnotemark\end{tabular}
+\\ \hline
+\textbf{Pior caso}          & \begin{tabular}[c]{@{}c@{}}O(N)\\ Folha em  uma árvore completamente desbalanceada, cuja altura h(N)=N\end{tabular}
+\\ \hline
+\textbf{Ordenação}          & Inerente à estrutura de dados
+\\ \hline
+\textbf{Estrutura de Dados} & Árvore binária de busca
+\\ \hline
+\textbf{Linhas Python}      & 10
+\\ \hline
+\textbf{Observações}                         & \begin{tabular}[c]{@{}c@{}}Relativamente simples\\ Bom desempenho no caso médio sem necessitar de ordenação\\ Inserção de valores ordenados desbalanceia a árvore, aumentando os custos das operações\end{tabular}
+\\ \hline
+\end{tabular}

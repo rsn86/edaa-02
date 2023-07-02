@@ -1,0 +1,11 @@
+\begin{algorithm}
+    \caption{ - Busca sequencial em lista ligada \cite[p. 172]{cormen_algoritmos:_2012}}
+    \begin{algorithmic}[1]
+        \STATE $e \leftarrow Lista.inicio $
+        \WHILE{$ e \ne NULO \AND e.chave \ne x $}
+            \STATE $e \leftarrow e.proximo$
+        \ENDWHILE
+        \RETURN e
+    \end{algorithmic}
+    \label{alg:busca_lista}
+\end{algorithm}

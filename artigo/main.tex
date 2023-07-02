@@ -1,0 +1,239 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt]{article}
+
+\usepackage{sbc-template}
+
+\usepackage{graphicx,url}
+
+\usepackage{subfigure}
+\usepackage{svg}   % Imagens SVG
+
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}  
+
+\usepackage{adjustbox}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\floatname{algorithm}{Algoritmo}
+\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
+\renewcommand{\algorithmicensure}{\textbf{Saída:}}
+\renewcommand{\algorithmicif}{\textbf{se}}
+\renewcommand{\algorithmicthen}{\textbf{então}}
+\renewcommand{\algorithmicend}{\textbf{fim}}
+\renewcommand{\algorithmicforall}{\textbf{para todo}}
+\renewcommand{\algorithmicfor}{\textbf{para}}
+\renewcommand{\algorithmicreturn}{\textbf{retorne}}
+\renewcommand{\algorithmicelse}{\textbf{senão}}
+\renewcommand{\algorithmicdo}{\textbf{faça}}
+\renewcommand{\algorithmicfalse}{\textbf{falso}}
+\renewcommand{\algorithmicwhile}{\textbf{enquanto}}
+\renewcommand{\algorithmiccomment}[1]{\hspace{2em}// #1}
+\renewcommand{\algorithmicand}{\hspace{0.5em}\textbf{e}\hspace{0.5em}}
+
+\sloppy
+
+\title{Estruturas de Dados e Análise de Algoritmos - EDAA\\ Avaliação 1.2 – Algoritmos de Busca – Parte 2}
+
+\author{Rodrigo Schmidt Nurmberg\inst{1}}
+
+\address{Programa de Pós Graduação em Ciência da Computação (PPGCOMP)\\ Universidade Estadual do Oeste do Paraná (UNIOESTE)\\
+  Rua Universitária, 2069 Bloco B -- Bairro Universitário -- 85819-110 -- Cascavel -- PR
+  \email{rodrigo.nurmberg@unioeste.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+\begin{abstract}
+In this work, search methods: sequential, jump and binary in static arrays, sequential in linked lists and search in binary search trees, were empirically analyzed, regarding the number of comparisons and execution time, in the search of integer values, based on two scenarios: random and worst case.
+The results show that methods with the same cost can present different execution time. Furthermore, the choice of the search method must consider not only it's costs, but also the costs of other operations performed by the application, such as insertion and ordering or balancing. In certain cases, the adoption of a more expensive algorithm can be justified by it's usage scenario.
+\end{abstract}
+
+\begin{resumo}
+Os métodos de busca sequencial, por saltos e binária em arranjos estáticos, sequencial em listas ligadas e busca em árvores binárias de busca, foram analisados empiricamente, quanto ao número de comparações e ao tempo de execução, na busca de valores inteiros, com base em dois cenários: aleatório e pior caso.
+Os resultados mostram que métodos com mesmo custo podem apresentar diferenças no tempo de execução. Além disso, a escolha do método de busca deve considerar não apenas os custos do algoritmo em si, mas também os custos das demais operações realizadas pela aplicação, como inserção e ordenação ou balanceamento. Em certos casos, pode-se justificar a adoção de um algoritmo mais custoso tendo em vista o cenário de utilização. 
+\end{resumo}
+
+\section{Introdução}
+
+Busca e ordenação são operações essenciais na computação, como são utilizadas com frequência, mesmo pequenas otimizações podem gerar grandes impactos, principalmente ao operarem sobre grandes conjuntos de dados.
+
+A operação de busca consiste em determinar a posição ocupada por um elemento (chave de busca) em um conjunto de dados\footnote{Caso o elemento não esteja no conjunto, costuma-se retornar vazio ou falso.}.
+
+Na ordenação, para um dado conjunto de entrada $\langle a_{1}, a_{2}, ..., a_{n} \rangle$, retorna-se uma permutação da sequência de entrada $\langle a^{'}_{1}, a^{'}_{2}, ..., a^{'}_{n} \rangle \vert a^{'}_{i} \leq a^{'}_{i+1} \forall i_{1}^{n-1}$\cite{cormen_algoritmos:_2012}\footnote{Também é possível ordenar os valores de forma decrescente: $\langle a^{'}_{1}, a^{'}_{2}, ..., a^{'}_{n} \rangle \vert a^{'}_{i} \geq a^{'}_{i+1} \forall i_{1}^{n-1}$}.
+
+A escolha dos algoritmos mais adequados, depende da natureza de cada aplicação e deve considerar, entre outros fatores, se os dados encontram-se ordenados, a forma como os dados estão armazenados (unidades de acesso aleatório ou sequencial, cada qual com sua velocidade), as estruturas de dados utilizadas (vetores, listas encadeadas, árvores, etc), quantidade de itens a ordenar e como estão distribuídos (uniformemente ou não) e também a arquitetura do computador (com diferentes operações e seus custos associados).
+
+\subsection{Algoritmos de busca} \label{sec:algoritmos}
+
+A seguir, são apresentados os pseudo-códigos dos 5 algoritmos de busca analisados neste trabalho, cujas características são sumarizadas nos quadros comparativo das Tabelas \ref{quadro:comparativo_buscas1} e \ref{quadro:comparativo_buscas2}. Cabe observar que optou-se pelas versões iterativas dos algoritmos.
+
+Os algoritmos para arranjos estáticos tem como entrada o arranjo $ A^n_{i=1} \langle a_{1}, a_{2}, ..., a_{n} \rangle $ e a chave de busca $ x $, e como saída o índice $ i $ do 1º elemento $ a_{i} \vert a_{i} = x $ ou falso caso $ x \notin A $.
+
+Os algoritmos para estruturas dinâmicas, recebem como entada um ponteiro para o nó inicial da estrutura $ E $ e a chave de busca $ x $, tendo como saída o 1º elemento $ e \vert e.chave = x $ ou falso caso $ x \notin E $.
+
+\input{busca_sequencial}
+\input{busca_por_saltos}
+\input{busca_binaria}
+\input{busca_lista}
+\input{busca_arvore}
+
+\begin{table}[h]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \input{quadro_algoritmos1}
+    }
+    \caption{Quadro comparativo dos algoritmos de busca em arranjos estáticos.}
+    \small{Fonte: Elaborado com base em \cite{sultana_brief_2017}.}
+    \label{quadro:comparativo_buscas1}
+\end{table}
+\footnotetext{Custos para busca por salto simples, quando o custo do salto é igual ao custo da busca sequencial. \label{jump_search_simple}}
+
+As considerações feitas, no quadro comparativo da Tabela \ref{quadro:comparativo_buscas1}, a respeito do algoritmo de busca sequencial, se aplicam tanto às buscas em arranjos estáticos (vetores) quanto às buscas em listas ligadas.
+
+\begin{table}[h]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \input{quadro_algoritmos2}
+    }
+    \caption{Quadro descritivo do algoritmo de busca em árvore binária de busca.}
+    \small{Fonte: Elaborado com base em \cite{goodrich_algorithm_2015}.}
+    \label{quadro:comparativo_buscas2}
+\end{table}
+\footnotetext{Apesar da altura h(N) estar no intervalo $[log_{2} N, N]$, quando a árvore é construída aleatoriamente, sua altura será $O(log_{2} N)$, com grande probabilidade \cite{goodrich_algorithm_2015}.\label{bst_height}}
+
+\section{Materiais e Métodos}
+
+Os algoritmos da Seção \ref{sec:algoritmos}, foram implementados\footnote{Código e outras informações disponíveis em https://github.com/rsn86/edaa-02} na linguagem Python e comparados empiricamente na busca de valores inteiros sem repetições, em estruturas de dados com tamanho variando entre 100.000 e 1.000.000 elementos, em intervalos de 100.000. Com base em 2 cenários de testes:
+\begin{itemize}
+    \item Aleatório: Elementos e chave de busca gerados aleatoriamente\footnote{Valores no intervalo $[0, 100 * N]$, onde N é a quantidade de elementos.}. Para cada tamanho das estruturas foram executadas 100 buscas com chaves distintas.
+    \item Pior caso: Chave de busca selecionada para maximizar o número de comparações de cada algoritmo\footnote{Elementos do cenário aleatório, ordenados crescentemente, e chave de busca o maior elemento, correspondendo ao último elemento da estrutura de dados.}. Foram executadas 3 buscas.
+\end{itemize}
+
+Para cada execução, registrou-se o número de comparações ($a_{i} = x$) e o tempo de execução (em ms) de cada um dos cinco métodos de busca implementados. Foram calculadas as médias ($\bar{x}$) e os desvios padrão ($\sigma$). Para as árvores de busca binária, registrou-se a altura da árvore.
+
+Além disso, para o cenário aleatório, também foi registrado o percentual de vezes em que a chave estava presente no arranjo, coluna $x \in A$ das Tabelas \ref{tab:resultados1} e \ref{tab:resultados2}.
+
+Para os métodos de busca que necessitam de arranjos ordenados, o tempo de ordenação\footnote{Utilizando o método de ordenação padrão da linguagem Python - TimSort.} foi registrado separadamente do tempo de execução das buscas\footnote{Calculou-se a média e desvio padrão de 3 execuções}.
+
+Os testes foram conduzidos em um ambiente de desenvolvimento colaborativo\footnote{https://research.google.com/colaboratory/faq.html}, cujos recursos são compartilhados e estão sujeitos à flutuações de disponibilidade. Para minimizar o impacto dessas flutuações nos resultados, foram realizadas 2 execuções adicionais para cada teste, e os 2 maiores tempos de execução foram descartados.
+
+\section{Resultados}
+A Tabela \ref{tab:resultados1} sumariza os resultados dos testes em arranjos estáticos e está dividida em 3 conjuntos de colunas: cenários aleatório e pior caso, e ordenação. 
+Organizada de forma similar, a Tabela \ref{tab:resultados2} sumariza os resultados para os testes nas estruturas dinâmicas.
+
+Para a ordenação são apresentados apenas os tempos médios e os desvios padrão, uma vez que se utilizou a implementação disponibilizada pela linguagem de programação e não se tem acesso aos números de comparações e trocas realizadas.
+
+Para o cenário de pior caso, apresentou-se o número de comparações (Comp. $x$), e não a média e desvio padrão, pois em todas as execuções foram realizadas o máximo de comparações de cada método, resultando num valor fixo e portanto $\sigma = 0$.
+
+Já no cenário aleatório, a coluna $x \in A$, traz apenas a média das vezes em que a chave estava presente no arranjo, o desvio padrão é irrelevante para análise em questão.
+
+\begin{table}[h]
+    \centering
+    \resizebox{\textwidth}{!}{
+        \input{tabela-unificada1}
+    }
+    \caption{Desempenho de métodos de busca em arranjos estáticos}
+    %\small{Fonte: Do autor}
+    \label{tab:resultados1}
+\end{table} 
+
+
+\begin{table}
+    \centering
+    \resizebox{0.9\textwidth}{!}{
+        \input{tabela-unificada2}
+    }
+    \caption{Desempenho dos métodos de busca em Listas e Árvores}
+    %\small{Fonte: Do autor}
+    \label{tab:resultados2}
+\end{table}
+
+A influência da fluatação na disponibilidade dos recursos pode ser observada ao comparar os valores dos tempos de ordenação no cenário pior caso. Sendo o arranjo, a chave de busca e o número de comparações idênticos entre as execuções, esperava-se que os desvios padrão fossem pequenos, próximos a zero. Porém, apresentaram valores absolutos e relativos elevados, chegando a 64,77 ms e CV\footnote{Coeficiente de variação: $CV=100\frac{\sigma}{\bar{x}}$} de 15,63\%, para 1 milhão de elementos. Ainda, pode ser facilmente observada, neste mesmo cenário, pelos menores tempos de busca em conjuntos maiores, por ex. nos tempos para 800 e 900 mil elementos.
+
+O método de ordenação utilizado, beneficia-se da existência de sequências ordenadas\footnote{Máximas sequências monotônicas - sequências de maior comprimento sem inversão na ordenação.} no conjunto de dados. Isso pode explicar, pelo menos parcialmente, a aparente incongruência nos tempos de ordenação, nos quais arranjos maiores, com 800 mil e 1 milhão de elementos, apresentaram tempos menores que os arranjos de 700 mil e 900 mil elementos. Conforme \cite{auger:hal-01798381}, o custo do TimSort é $O(N + N\mathcal{H})$\footnote{De forma simplificada, assume-se o custo como $O(N*log_{2}N)$.}, a entropia $\mathcal{H}$\footnote{$\mathcal{H}=-\sum{\frac{r_{i}}{N} log_{2}(\frac{r_{i}}{N})}$, $r_{i} - $ comprimento da i-ésima sequência monotônica máxima.} depende do número e comprimento das sequencias parcialmente ordenadas, porém o cálculo não é trivial e foge do escopo deste trabalho, sendo assim, $\mathcal{H}$ não foi calculada.
+
+Os custos da busca binária, para os cenários aleatório e pior caso, são assintoticamente iguais e empiricamente ficaram muito próximos. Foram ligeiramente inferiores aos encontrados no custo médio da busca em árvores binárias de busca no cenário aleatório, que também é $O(log_{2} N)$\footref{bst_height}. Porém, a árvore de busca dispensa a ordenação prévia. Na verdade, a inserção de valores ordenados leva ao desbalanceamento da árvore de busca, aumentando sua altura e, consequentemente, elevando os custos das buscas, que no caso extremo pode chegar a $O(N)$ \cite[p.72]{gonnet_handbook_1984}.
+
+A diferença de custos, entre algoritmos de mesmo custo assintótico, ocorre pois o custo assintótico ($O$) considera apenas o termo positivo de maior grau da equação de custo, desconsiderando os coeficientes do polinômio e os termos de menor grau.
+
+Os custos encontrados para o pior caso, Tabelas \ref{tab:resultados1} e \ref{tab:resultados2}, correspondem aos descritos na literatura e sumarizados nos quadros comparativos das Tabelas \ref{quadro:comparativo_buscas1} e \ref{quadro:comparativo_buscas2}, divergindo apenas para o algoritmo de buscas por saltos, sugerindo que o custo do salto é diferente do custo da busca sequencial\footnote{Nesse caso o tamanho do salto deveria ser $\sqrt{(a/b)N}$, com custo $\sqrt{abN}$. Custos, a: salto, b: busca sequencial. Porém o tamanho do salto utilizado foi $\sqrt{N}$.} ou que a literatura não considera o custo da busca sequencial, uma vez que o custo encontrado ($2\sqrt{N}$), corresponde ao custo reportado na literatura ($\sqrt{N}$), acrescido do custo da busca sequencial em um bloco de tamanho $\sqrt{N}$.
+
+A respeito da altura das árvores de busca, os valores observados para o pior caso condizem com o esperado. Já para o cenário aleatório, apesar de assintoticamente ainda serem equivalentes aos relatados, os valores encontrados foram o dobro do esperado, com h(N) ficando próxima de $2*log_{2} N$.
+%TODO: Discutir Resultados lista e árvore
+
+Como os testes foram conduzidos em duas etapas, a primeira referente às buscas em arranjos estáticos e a segunda referente às estruturas dinâmicas, a utilização de uma semente de aleatoriedade foi essencial para assegurar
+a reprodutibilidade dos experimentos, como pode-se observar pelo número médio de comparações para busca sequencial nas duas situações. As poucas linhas divergentes podem ser explicadas pela técnica empregada para minimizar as flutuações de desempenho, em virtude do ambiente compartilhado, que remove os 2 maiores tempos de cada teste e que podem corresponder a chaves diferentes entre os testes, levando à diferenças no número de comparações.
+
+Para facilitar a comparação entre os métodos de busca para diferentes tamanhos de arranjo, foram elaborados os gráficos a seguir. Dada a diferença na ordem de grandeza entre os métodos, adotou-se a escala logarítmica no eixo Y.
+
+Nas Figuras \ref{fig:comp_aleatorio} e \ref{fig:comp_pior_caso} são apresentados os gráficos dos números médios de comparações para os cenários aleatório e pior caso, respectivamente. 
+Como esperado, as buscas sequencial em vetores (linha amarela) e em listas ligadas (linha azul), realizaram o mesmo número médio de comparações, para os dois cenários.
+No cenário pior caso, a busca em árvores binárias de busca (linha vermelha) se igualou ao número de comparações dos métodos de busca sequencial. Já no cenário aleatório, seu comportamento, tanto em número de comparações quanto em tempo, foi similar à busca binária (linha verde).
+As buscas por interpolação (linha preta), e principalmente a binária, tiveram custos similares, em termos de comparações, em ambos os cenários.
+\begin{figure}[h]
+    \subfigure[Cenário Aleatório]{\includesvg[width=0.5\linewidth]{comparacoes-aleatorio.svg}\label{fig:comp_aleatorio}}
+    \subfigure[Pior Caso]{\includesvg[width=0.5\linewidth]{comparacoes-pior_caso.svg}\label{fig:comp_pior_caso}}
+    \caption{Média de comparações x Tamanho do Arranjo}
+    \label{fig:comp}
+\end{figure}
+
+As Figuras \ref{fig:tempo_aleatorio} e \ref{fig:tempo_pior_caso} apresentam os gráficos dos tempos médios de busca em relação ao tamanho dos arranjos, para os cenários aleatório e pior caso, respectivamente.
+
+Ainda que os métodos $O(N)$, buscas sequencial em vetores e em listas encadeadas, e o pior caso da busca em árvores binárias de busca, tenham realizado o mesmo número de comparações, houve diferença nos tempos médios de execução.
+Essa diferença foi pequena no cenário pior caso, porém, até de forma inesperada, a busca sequencial em listas apresentou tempos médios menores que a busca sequencial em arranjos estáticos.
+
+Apesar da aparente estabilidade no número médio de comparações, entre os dois cenários, para as buscas por interpolação e binária, os tempos médios revelaram algumas diferenças, com pequenas flutuações no cenário pior caso.
+
+\begin{figure}[H]
+    \subfigure[Cenário Aleatório]{\includesvg[width=0.5\linewidth]{tempo-aleatorio.svg}\label{fig:tempo_aleatorio}}
+    \subfigure[Pior Caso]{\includesvg[width=0.5\linewidth]{tempo-pior_caso.svg}\label{fig:tempo_pior_caso}}
+    \caption{Média do tempo x Tamanho do Arranjo}
+    \label{fig:tempo}
+\end{figure}
+
+\section{Conclusões}
+
+Conhecendo-se o cenário de utilização, é possível selecionar algoritmos mais adequados e performáticos. \cite{cappelle_searching_2021} apresentam um interessante levantamento sobre diversos algoritmos de busca em vetores. Nesse sentido, a principal conclusão deste estudo é que o custo de ordenação justifica-se para os casos de múltiplas buscas sobre o mesmo arranjo. E, apesar do algoritmo de busca binária apresentar o melhor desempenho, tanto em termos de tempo quanto comparações, ele não é adequado para vetores com muitas inserções e remoções, devido ao custo associado em se manter o vetor ordenado. Nesse caso, pode-se considerar a utilização de árvores de busca binária, preferencialmente as balanceadas, estruturas de dados não lineares, cujas restrições asseguram propriedades interessantes, garantindo bons custos de inserção, remoção e busca.
+
+Em árvores binárias de busca, muitas operações podem ser realizadas em $O(h(N))$ \cite[p.71]{gonnet_handbook_1984}, incluindo inserções e remoções, por isso é importante manter a árvore balanceada, de forma a minimizar sua altura.
+No cenário de pior caso, onde $h(N)=N$, foi necessário desenvolver um método especial para que a criação da árvore ocorresse em tempo aceitável, pois utilizando o método de inserção elemento a elemento, do cenário aleatório,
+o tempo de execução do experimento facilmente ultrapassava os 50 minutos, sem concluir. Com a utilização do método especial de inserção, todo o experimento foi concluído em menos de 10 minutos.
+
+Apesar dos custos de criação das estruturas de dados terem sidos desconsiderados neste experimento, ficou evidente que eles podem ter impacto significativo em cenários reais de utilização.
+Nesse aspecto, as listas encadeadas apresentam os melhores custos, $O(1)$ para inserções nas extremidades e remoções no início, e se a lista for duplamente encadeada, também é possível remover do fim em $O(1)$.
+Para arranjos estáticos as operações podem demandar deslocamento de elementos ou expansão da estrutura com cópia dos dados para novas regiões de memória, com isso as operações tem custo $O(N)$.
+Em contrapartida, apenas a busca sequencial, com custo $O(N)$, pode ser utilizado em listas ligadas. Já os arranjos estáticos, por suportarem acesso aleatório (indexação), contam com diversos métodos, incluindo a busca binária, de custo $O(log_{2} N)$.
+
+Dada a similaridade dos custos e das abordagens dos métodos de busca binária, em arranjos estáticos ordenados, e a busca em árvores binárias de busca, aleatórias ou balanceadas, seria interessante conduzir um experimento comparando empiricamente os tempos de criação e manutenção das estruturas entre: arranjos estáticos + ordenação e árvores binárias de busca + balanceamento.
+
+O fato de terem sido adotadas estruturas de dados com valores espalhados, não contínuos, e chaves de buscas que podiam estar ausentes do conjunto, apesar de contribuir para o aumento nos tempos de execução e no número de comparações, aproxima o cenário de testes de um cenário de uso real, no qual não se pode controlar a distribuição dos valores e não se tem certeza sobre a presença da chave de busca no conjunto.
+
+A influência da entropia no método de ordenação, e consequentemente seus custos, carece de investigação. Alternativamente, poderia ser adotado um método menos suscetível a tal fator.
+
+A execução em ambiente compartilhado permitiu visualizar as relações de grandeza entre os métodos de busca e os tamanhos dos arranjos, porém valores mais precisos poderiam ser obtidos em um ambiente controlado, com alocação dedicada de recursos.
+
+A degradação na linearidade dos tempos de busca, observável no cenário pior caso da busca sequencial, com o crescimento do tamanho dos arranjos, pode estar relacionada à hierarquia de memória e a necessidade de movimentação dos dados. Um aprofundamento do estudo envolveria maiores conhecimentos sobre a arquitetura do ambiente, como modelo da CPU, tamanho e temporização das memórias cache e RAM.
+
+\bibliographystyle{sbc}
+\bibliography{edaa02}
+
+\end{document}
